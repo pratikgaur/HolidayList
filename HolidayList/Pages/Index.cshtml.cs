@@ -13,7 +13,7 @@ namespace HolidayList.Pages
     public class IndexModel : PageModel
     {
         //WebClient webClient = null;
-        public JsonResult OnGet()
+        public void OnGet()
         {
             using (WebClient webClient = new WebClient())
             {
@@ -71,7 +71,7 @@ namespace HolidayList.Pages
                 String filteredHolidaysList = webClient.DownloadString("https://calendarific.com/api/v2/holidays?&api_key=3b2cc4a9fcb58a121947815135fca92694b0f63e&country=US&year=2019&location="+ filterid);
                 QuickType.Welcome StateHoliday = QuickType.Welcome.FromJson(filteredHolidaysList);
 
-                return new JsonResult(StateHoliday);
+                //return new JsonResult(StateHoliday);
 
             }             
         }
