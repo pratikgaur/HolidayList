@@ -13,23 +13,32 @@ namespace HolidayList.Pages
     public class IndexModel : PageModel
     {
         //WebClient webClient = null;
-        public void OnGet()
+        public string DownloadData(string jsonendpoint)
         {
+            string rawData = "";
             using (WebClient webClient = new WebClient())
             {
-                String Places = webClient.DownloadString("https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json");
-                String jsonString = webClient.DownloadString("https://calendarific.com/api/v2/holidays?&api_key=3b2cc4a9fcb58a121947815135fca92694b0f63e&country=US&year=2019");
+                rawData = webClient.DownloadString(jsonendpoint);
+            }
+            return rawData;
+        }
+
+        public void OnGet()
+        {
+                String CalenderAPIkey = System.IO.File.ReadAllText("APIkey.txt");
+                String CalenderData = DownloadData("https://calendarific.com/api/v2/holidays?&country=US&year=2019&api_key=" + CalenderAPIkey);
+                String Places = DownloadData("https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json");
                 Places[] Place = QuickTypePlaces.Places.FromJson(Places);
-                
-                QuickType.Welcome welcome = QuickType.Welcome.FromJson(jsonString);
-                List <QuickType.Holiday> holidays = new List<Holiday>();
-                string state = null;
+
+                QuickType.Welcome welcome = QuickType.Welcome.FromJson(CalenderData);
+                List<QuickType.Holiday> holidays = new List<Holiday>();
+                string State = null;
                 foreach (QuickTypePlaces.Places Area in Place)
                 {
-                    if(Area.Country == "United States" && Area.Subcountry == "New York")
+                    if (Area.Country == "United States" && Area.Subcountry == "New York")
                     {
 
-                        state = Area.Subcountry;
+                        State = Area.Subcountry;
                         break;
                     }
                 }
@@ -37,23 +46,23 @@ namespace HolidayList.Pages
 
                 foreach (QuickType.Holiday Holidays in welcome.Response.Holidays)
                 {
-                   if (Holidays.States.Enum == null)
+                    if (Holidays.States.Enum == null)
                     {
-                        if ((Holidays.States.StateArray[0].Name) == state)
+                        if ((Holidays.States.StateArray[0].Name) == State)
                         {
                             holidays.Add(Holidays);
                         }
-                         
+
                     }
                     else
                     {
                         holidays.Add(Holidays);
                     }
-                   
+
                 }
 
                 ViewData["Holidays"] = holidays;
-                ViewData["state"] = state;
+                ViewData["state"] = State;
                 ViewData["Places"] = Place;
 
                 String filterid = null;
@@ -61,19 +70,20 @@ namespace HolidayList.Pages
                 {
                     if (Holidays.States.Enum == null)
                     {
-                        if ((Holidays.States.StateArray[0].Name) == state)
+                        if ((Holidays.States.StateArray[0].Name) == State)
                         {
                             filterid = Holidays.States.StateArray[0].Iso;
                         }
                     }
                 }
 
-                String filteredHolidaysList = webClient.DownloadString("https://calendarific.com/api/v2/holidays?&api_key=3b2cc4a9fcb58a121947815135fca92694b0f63e&country=US&year=2019&location="+ filterid);
+                String filteredHolidaysList = DownloadData("https://calendarific.com/api/v2/holidays?&country=US&year=2019&api_key=" + CalenderAPIkey + "&location=" + filterid);
+
                 QuickType.Welcome StateHoliday = QuickType.Welcome.FromJson(filteredHolidaysList);
 
-                //return new JsonResult(StateHoliday);
+                // return new JsonResult(StateHoliday);
 
-            }             
+            
         }
     }
 }
