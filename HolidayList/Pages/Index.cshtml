@@ -2,54 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var holidays = (List <QuickType.Holiday>)ViewData["Holidays"];
-    var state = (string)ViewData["state"];
-    var Place = (QuickTypePlaces.Places[])ViewData["Places"];
+   
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <hr />
-    <table border="1" width="90%">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                Cities
-            </th>
- 
-        </tr>
-      
-            @foreach (QuickType.Holiday Holidays in holidays)
-            {
-                <tr>
-                    <td>@Holidays.Name</td>
-                    <td>@Holidays.Description</td>
-                    <td>@Holidays.Date.Iso</td>
 
-                    <td>
-                        @{
-                            foreach (QuickTypePlaces.Places place in Place)
-                            {
-                                if (@place.Subcountry == state)
-                                {
-                                    <ul>
-                                        <li>@place.Name</li>
-                                    </ul>
-
-                                }
-                            }
-                        }
-                    </td>
-
-                 </tr>
-            }
-     </table>
-</div>
