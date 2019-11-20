@@ -15,7 +15,7 @@ namespace QuickType
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Welcome
+    public partial class HolidayData
     {
         [JsonProperty("meta")]
         public Meta Meta { get; set; }
@@ -141,14 +141,14 @@ namespace QuickType
         public static implicit operator StatesUnion(State[] StateArray) => new StatesUnion { StateArray = StateArray };
     }
 
-    public partial class Welcome
+    public partial class HolidayData
     {
-        public static Welcome FromJson(string json) => JsonConvert.DeserializeObject<Welcome>(json, QuickType.Converter.Settings);
+        public static HolidayData FromJson(string json) => JsonConvert.DeserializeObject<HolidayData>(json, QuickType.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Welcome self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this HolidayData self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
     }
 
     internal static class Converter
