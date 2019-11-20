@@ -12,7 +12,6 @@ namespace HolidayList.Pages
 {
     public class IndexModel : PageModel
     {
-        //WebClient webClient = null;
         public JsonResult OnGet()
         {
             {
