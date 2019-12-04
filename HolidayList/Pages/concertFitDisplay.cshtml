@@ -1,0 +1,33 @@
+﻿@page
+@model HolidayList.Pages.concertFitDisplayModel
+@{
+    ViewData["Title"] = "concertFitDisplay";
+    var artist = (ConcertFitResponse.ConcertFit[])ViewData["Artist"];
+}
+
+<h1>ConcertFitDisplay</h1>
+
+<div class="text-center">
+    @* <h1 class="display-4">Welcome</h1>*@
+    <hr />
+    <table border="1" width="90%">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Event URL
+            </th>
+        </tr>
+
+        @foreach (ConcertFitResponse.ConcertFit artistlist in artist)
+        {
+            <tr>
+                <td>@artistlist.Artist</td>
+                <td>@artistlist.EventUrl</td>
+            </tr>
+
+        }
+    </table>
+</div>
+
