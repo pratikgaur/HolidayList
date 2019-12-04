@@ -5,61 +5,67 @@
     var state = (string)ViewData["state"];
 }
 
-<h1>United States's Holidays for 2019</h1>
+    <head>
+        <link rel="stylesheet" href="~/css/StyleSheetCustom.css" media="only screen and (min-width: 800px)" type="text/css" />
+
+    </head>
+
+    <div>
+
+        <h1>United States's Holidays for 2019</h1>
 
 
-<form class="form-inline" method="post">
-    <div class="form-group">
-        <label for="cityName">City Name :</label>
-        <input type="text" class="form-control" name="cityName" id ="cityName" placeholder="Enter City Name">
-    </div>
+        <form class="form-inline" method="post">
+            <div class="form-group">
+                <label for="cityName">City Name :</label>
+                <input type="text" class="form-control" name="cityName" id="cityName" placeholder="Enter City Name">
+            </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-    
-<hr />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
-@if (Model.processComplete)
-{
-    <div class="text-center">
-        @* <h1 class="display-4">Welcome</h1>*@
         <hr />
-        <table border="1" width="100%">
 
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Date
-                </th>
-            </tr>
+        @if (Model.processComplete)
+        {
+            <div class="text-center">
+                <hr />
+                <table border="1" width="100%">
+
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                    </tr>
 
 
-            @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)
-            {
-                if (Holidays.States.Enum == null)
-                {
-                    for (int i = 0; i < Holidays.States.StateArray.Length; i++)
+                    @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)
                     {
-                        if (Holidays.States.StateArray[i].Name == state)
+                        if (Holidays.States.Enum == null)
                         {
-                            <tr>
-                                <td>@Holidays.Name</td>
-                                <td>@Holidays.Description</td>
-                                <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
-                            </tr>
+                            for (int i = 0; i < Holidays.States.StateArray.Length; i++)
+                            {
+                                if (Holidays.States.StateArray[i].Name == state)
+                                {
+                                    <tr>
+                                        <td>@Holidays.Name</td>
+                                        <td>@Holidays.Description</td>
+                                        <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
+                                    </tr>
+                                }
+                            }
+
                         }
+
                     }
-
-                }
-
-            }
-        </table>
+                </table>
+            </div>
+        }
     </div>
-}
-
 

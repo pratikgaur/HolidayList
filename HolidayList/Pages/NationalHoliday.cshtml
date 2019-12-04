@@ -5,8 +5,13 @@
     var holidays = (holidaysNamespace.HolidayList)ViewData["Holidays"];
 }
 
-<div class="text-center">
-    @* <h1 class="display-4">Welcome</h1>*@
+    <head>
+        <title>2019 National Holidays</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="~/css/StyleSheetCustom.css" media="only screen and (min-width: 800px)" type="text/css" />
+    </head>
+
+<div>
     <hr />
     <table border="1" width="90%">
         <tr>
@@ -23,11 +28,11 @@
 
         @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)  
         {
-            <tr>
-                <td>@Holidays.Name</td>
-                <td>@Holidays.Description</td>
-                <td>@Holidays.Date.Iso</td>
-            </tr>
+    <tr>
+        <td>@Holidays.Name</td>
+        <td>@Holidays.Description</td>
+        <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
+    </tr>
 
         }
     </table>
