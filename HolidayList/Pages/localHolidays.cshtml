@@ -1,0 +1,61 @@
+﻿@page
+@model HolidayList.Pages.localHolidaysModel
+@{
+    var holidays = (holidaysNamespace.HolidayList)ViewData["Holidays"];
+    var state = (string)ViewData["state"];
+}
+
+<h1>United States's Holidays for 2019</h1>
+
+<form class="form-inline" method="post">
+    <div class="form-group">
+        <label for="cityName">City Name :</label>
+        <input type="text" class="form-control" name="cityName">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<hr />
+
+@if (Model.processComplete)
+{
+    <div class="text-center">
+        @* <h1 class="display-4">Welcome</h1>*@
+        <hr />
+        <table border="1" width="90%">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+
+
+            @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)
+            {
+                if (Holidays.States.Enum == null)
+                {
+                    for (int i = 0; i < Holidays.States.StateArray.Length; i++)
+                    {
+                        if (Holidays.States.StateArray[i].Name == state)
+                        {
+                            <tr>
+                                <td>@Holidays.Name</td>
+                                <td>@Holidays.Description</td>
+                                <td>@Holidays.Date.Iso</td>
+                            </tr>
+                        }
+                    }
+
+                }
+
+            }
+        </table>
+    </div>
+}
+
+

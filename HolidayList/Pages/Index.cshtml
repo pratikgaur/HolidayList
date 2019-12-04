@@ -2,54 +2,85 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var holidays = (List <QuickType.Holiday>)ViewData["Holidays"];
-    var state = (string)ViewData["state"];
-    var Place = (QuickTypePlaces.Places[])ViewData["Places"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <hr />
-    <table border="1" width="90%">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                Cities
-            </th>
- 
-        </tr>
-      
-            @foreach (QuickType.Holiday Holidays in holidays)
-            {
-                <tr>
-                    <td>@Holidays.Name</td>
-                    <td>@Holidays.Description</td>
-                    <td>@Holidays.Date.Iso</td>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2019 US Holidays</title>
 
-                    <td>
-                        @{
-                            foreach (QuickTypePlaces.Places place in Place)
-                            {
-                                if (@place.Subcountry == state)
-                                {
-                                    <ul>
-                                        <li>@place.Name</li>
-                                    </ul>
 
-                                }
-                            }
-                        }
-                    </td>
 
-                 </tr>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        body {
+            font-family: Arial;
+            color: white;
+        }
+
+
+
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            top: 50px;
+            overflow-x: visible;
+            padding-top: 20px;
+        }
+
+
+
+        .left {
+            left: 0;
+            background-color: #a14444;
+        }
+
+
+
+        .right {
+            right: 0;
+            background-color: #5a3f3f;
+        }
+
+
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+
+
+            .centered img {
+                width: 400px;
+                border-radius: 100%;
             }
-     </table>
-</div>
+    </style>
+</head>
+<body>
+    <h1 align="center"><strong>2019 US Holidays</strong></h1>
+    <div class="split left">
+        <div class="centered">
+            <img src="~/Images/nyc.jpeg" alt="Search by cities">
+            <h2>Search by cities</h2>
+            <p><button type="button" class="btn-outline-danger" onclick="window.location.href = '/localHolidays';">Search holidays by cities</button></p>
+        </div>
+    </div>
+
+    <div class="split right">
+        <div class="centered">
+            <img src="~/Images/USNational.jpg" alt="Search by cities">
+            <h2>List of all National holidays</h2>
+            <p><button type="button" class="btn-outline-danger" onclick="window.location.href ='/NationalHolidays';">national holidays in US</button></p>
+        </div>
+    </div>
+
+</body>
+</html>
+

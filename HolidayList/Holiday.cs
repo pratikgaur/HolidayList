@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using holidaysNamespace;
 //
-//    var welcome = Welcome.FromJson(jsonString);
+//    var holidayList = HolidayList.FromJson(jsonString);
 
-namespace QuickType
+namespace holidaysNamespace
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace QuickType
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Welcome
+    public partial class HolidayList
     {
         [JsonProperty("meta")]
         public Meta Meta { get; set; }
@@ -141,14 +141,14 @@ namespace QuickType
         public static implicit operator StatesUnion(State[] StateArray) => new StatesUnion { StateArray = StateArray };
     }
 
-    public partial class Welcome
+    public partial class HolidayList
     {
-        public static Welcome FromJson(string json) => JsonConvert.DeserializeObject<Welcome>(json, QuickType.Converter.Settings);
+        public static HolidayList FromJson(string json) => JsonConvert.DeserializeObject<HolidayList>(json, holidaysNamespace.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Welcome self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this HolidayList self) => JsonConvert.SerializeObject(self, holidaysNamespace.Converter.Settings);
     }
 
     internal static class Converter

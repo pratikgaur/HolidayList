@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using worldCitiesNamespace;
 //
-//    var places = Places.FromJson(jsonString);
+//    var worldCities = WorldCities.FromJson(jsonString);
 
-namespace QuickTypePlaces
+namespace worldCitiesNamespace
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace QuickTypePlaces
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Places
+    public partial class WorldCities
     {
         [JsonProperty("country")]
         public string Country { get; set; }
@@ -30,14 +30,14 @@ namespace QuickTypePlaces
         public string Subcountry { get; set; }
     }
 
-    public partial class Places
+    public partial class WorldCities
     {
-        public static Places[] FromJson(string json) => JsonConvert.DeserializeObject<Places[]>(json, QuickTypePlaces.Converter.Settings);
+        public static WorldCities[] FromJson(string json) => JsonConvert.DeserializeObject<WorldCities[]>(json, worldCitiesNamespace.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Places[] self) => JsonConvert.SerializeObject(self, QuickTypePlaces.Converter.Settings);
+        public static string ToJson(this WorldCities[] self) => JsonConvert.SerializeObject(self, worldCitiesNamespace.Converter.Settings);
     }
 
     internal static class Converter
