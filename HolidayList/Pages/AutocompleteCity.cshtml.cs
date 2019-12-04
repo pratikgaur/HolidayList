@@ -19,6 +19,9 @@ namespace HolidayList.Pages
             AddCity("New York");
             AddCity("Chicago");
             AddCity("Baltimore");
+            AddCity("Boston");
+            AddCity("Detroit");
+            AddCity("Seattle");
             return new JsonResult(cityNames);
         }
 

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HolidayList.Pages
 {
-    public class AboutUsModel : PageModel
+    public class AboutModel : PageModel
     {
         public void OnGet()
         {
+
         }
     }
 }

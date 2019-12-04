@@ -5,67 +5,82 @@
     var state = (string)ViewData["state"];
 }
 
-    <head>
-        <link rel="stylesheet" href="~/css/StyleSheetCustom.css" media="only screen and (min-width: 800px)" type="text/css" />
+<head>
+    <link rel="stylesheet" href="~/css/StyleSheetCustom.css" media="only screen and (min-width: 800px)" type="text/css" />
 
-    </head>
+</head>
 
-    <div>
+<div>
 
-        <h1>United States's Holidays for 2019</h1>
-
-
-        <form class="form-inline" method="post">
-            <div class="form-group">
-                <label for="cityName">City Name :</label>
-                <input type="text" class="form-control" name="cityName" id="cityName" placeholder="Enter City Name">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        <hr />
-
-        @if (Model.processComplete)
-        {
-            <div class="text-center">
-                <hr />
-                <table border="1" width="100%">
-
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                    </tr>
+    <h1>United States's Holidays for 2019</h1>
 
 
-                    @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)
+    <form class="form-inline" method="post">
+        <div class="form-group">
+            <label for="cityName">City Name :</label>
+            <input type="text" class="form-control" name="cityName" id="cityName" placeholder="Enter City Name">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <hr />
+
+    @if (Model.processComplete)
+    {
+        <div class="text-center">
+            <hr />
+            <table border="1" width="100%">
+                <colgroup>
+                    <col span="1" style=" width:15%" ; />
+                    <col span="1" style=" width:70%" ; />
+                    <col span="1" style=" width:15%" ; />
+                </colgroup>
+
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                </tr>
+
+
+                @foreach (holidaysNamespace.Holiday Holidays in holidays.Response.Holidays)
+                {
+                    if (Holidays.States.Enum == null)
                     {
-                        if (Holidays.States.Enum == null)
+                        for (int i = 0; i < Holidays.States.StateArray.Length; i++)
                         {
-                            for (int i = 0; i < Holidays.States.StateArray.Length; i++)
+                            if (Holidays.States.StateArray[i].Name == state)
                             {
-                                if (Holidays.States.StateArray[i].Name == state)
-                                {
-                                    <tr>
-                                        <td>@Holidays.Name</td>
-                                        <td>@Holidays.Description</td>
-                                        <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td>@Holidays.Name</td>
+                                    <td>@Holidays.Description</td>
+                                    <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
+                                </tr>
                             }
-
                         }
 
                     }
-                </table>
-            </div>
-        }
-    </div>
 
+                }
+            </table>
+        </div>
+    }
+</div>
+@section scripts{
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#cityName").autocomplete({ source: "/AutoCompleteCity", minLength: 3 });
+        });
+
+    </script>
+}
