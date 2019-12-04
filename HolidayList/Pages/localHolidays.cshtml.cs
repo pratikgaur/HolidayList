@@ -25,7 +25,6 @@ namespace HolidayList.Pages
                 WorldCities[] Place = worldCitiesNamespace.WorldCities.FromJson(Places);
 
                 holidaysNamespace.HolidayList welcome = holidaysNamespace.HolidayList.FromJson(holidaysData);
-                //List<holidaysNamespace.HolidayList> holidays = new List<holidaysNamespace.HolidayList>();
                 string state = null;
                 foreach (worldCitiesNamespace.WorldCities Area in Place)
                 {
@@ -35,27 +34,6 @@ namespace HolidayList.Pages
                         break;
                     }
                 }
-
-                //   foreach (QuickType.Holiday Holidays in welcome.Response.Holidays)
-                //    {
-                //        if (Holidays.States.Enum == null)
-                //        {
-                //            if ((Holidays.States.StateArray[0].Name) == state)
-                //            {
-                //                holidays.Add(Holidays);
-                //            }
-
-                //        }
-                //        else
-                //        {
-                //            holidays.Add(Holidays);
-                //        }
-
-                //    }
-
-                //    ViewData["Holidays"] = holidays;
-                //    ViewData["state"] = state;
-                //    ViewData["Places"] = Place;
 
                 String filterid = null;
                 foreach (holidaysNamespace.Holiday Holidays in welcome.Response.Holidays)

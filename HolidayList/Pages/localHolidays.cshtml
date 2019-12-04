@@ -7,13 +7,16 @@
 
 <h1>United States's Holidays for 2019</h1>
 
+
 <form class="form-inline" method="post">
     <div class="form-group">
         <label for="cityName">City Name :</label>
-        <input type="text" class="form-control" name="cityName">
+        <input type="text" class="form-control" name="cityName" id ="cityName" placeholder="Enter City Name">
     </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+    
 <hr />
 
 @if (Model.processComplete)
@@ -21,7 +24,8 @@
     <div class="text-center">
         @* <h1 class="display-4">Welcome</h1>*@
         <hr />
-        <table border="1" width="90%">
+        <table border="1" width="100%">
+
             <tr>
                 <th>
                     Name
@@ -46,7 +50,7 @@
                             <tr>
                                 <td>@Holidays.Name</td>
                                 <td>@Holidays.Description</td>
-                                <td>@Holidays.Date.Iso</td>
+                                <td>@Holidays.Date.Iso.Date.Date.Month.ToString()-@Holidays.Date.Iso.Date.Date.Day.ToString()-@Holidays.Date.Iso.Date.Date.Year.ToString()</td>
                             </tr>
                         }
                     }

@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome",
+  "definitions": {
+    "Welcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        },
+        "response": {
+          "$ref": "#/definitions/Response"
+        }
+      },
+      "required": [
+        "meta",
+        "response"
+      ],
+      "title": "Welcome"
+    },
+    "Meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "code"
+      ],
+      "title": "Meta"
+    },
+    "Response": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "holidays": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Holiday"
+          }
+        }
+      },
+      "required": [
+        "holidays"
+      ],
+      "title": "Response"
+    },
+    "Holiday": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "$ref": "#/definitions/Date"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "locations": {
+          "type": "string"
+        },
+        "states": {
+          "$ref": "#/definitions/States"
+        }
+      },
+      "required": [
+        "date",
+        "description",
+        "locations",
+        "name",
+        "states",
+        "type"
+      ],
+      "title": "Holiday"
+    },
+    "Date": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "iso": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "datetime": {
+          "$ref": "#/definitions/Datetime"
+        }
+      },
+      "required": [
+        "datetime",
+        "iso"
+      ],
+      "title": "Date"
+    },
+    "Datetime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "month": {
+          "type": "integer"
+        },
+        "day": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "day",
+        "month",
+        "year"
+      ],
+      "title": "Datetime"
+    },
+    "States": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enum": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stateArray": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StateArray"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "enum",
+        "stateArray"
+      ],
+      "title": "States"
+    },
+    "StateArray": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "abbrev": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "exception": {
+          "type": "null"
+        },
+        "iso": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "abbrev",
+        "exception",
+        "id",
+        "iso",
+        "name"
+      ],
+      "title": "StateArray"
+    }
+  }
+}
